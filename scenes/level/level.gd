@@ -60,6 +60,12 @@ func place_player_on_tile(tile_coord: Vector2i) -> void:
 
 # GAME LOGIC
 
+func check_game_state() -> void:
+	for t in tile_map.get_used_cells(TARGET_LAYER):
+		if !cell_is_box(t):
+			return
+		
+
 func move_box(box_tile: Vector2i, direction: Vector2i) -> void:
 	var dest = box_tile + direction
 	
@@ -105,6 +111,7 @@ func player_move(direction: Vector2i):
 		if box_seen:
 			move_box(new_tile, direction)
 		place_player_on_tile(new_tile)
+		check_game_state()
 		
 	_moving = false
 
