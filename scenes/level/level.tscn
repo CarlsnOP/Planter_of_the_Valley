@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://fwraimnd1ak3"]
+[gd_scene load_steps=8 format=3 uid="uid://fwraimnd1ak3"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_86rg7"]
 [ext_resource type="Texture2D" uid="uid://1604i64q0ing" path="res://assets/spritesheet.png" id="1_pu7na"]
 [ext_resource type="PackedScene" uid="uid://cxn4oy2saksw3" path="res://scenes/player/player.tscn" id="2_ligcg"]
+[ext_resource type="PackedScene" uid="uid://crn5ehh3u2pgv" path="res://scenes/hud/hud.tscn" id="4_t2k7n"]
+[ext_resource type="PackedScene" uid="uid://duemc5qhulqv4" path="res://scenes/game_over_ui/game_over_ui.tscn" id="5_ci0o5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uqweb"]
 resource_name = "level_tiles"
@@ -41,3 +43,10 @@ layer_3/tile_data = PackedInt32Array()
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.2, 1.2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("4_t2k7n")]
+
+[node name="GameOverUi" parent="CanvasLayer" instance=ExtResource("5_ci0o5")]
+visible = false
