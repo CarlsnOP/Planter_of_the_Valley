@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://fwraimnd1ak3"]
+
+[ext_resource type="Script" path="res://scenes/level/level.gd" id="1_86rg7"]
+[ext_resource type="Texture2D" uid="uid://1604i64q0ing" path="res://assets/spritesheet.png" id="1_pu7na"]
+[ext_resource type="PackedScene" uid="uid://cxn4oy2saksw3" path="res://scenes/player/player.tscn" id="2_ligcg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uqweb"]
+resource_name = "level_tiles"
+texture = ExtResource("1_pu7na")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_t8ltu"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_uqweb")
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_86rg7")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_t8ltu")
+format = 2
+layer_0/name = "Floor"
+layer_1/name = "Walls"
+layer_1/tile_data = PackedInt32Array()
+layer_2/name = "Targets"
+layer_2/tile_data = PackedInt32Array()
+layer_3/name = "Boxes"
+layer_3/tile_data = PackedInt32Array()
+
+[node name="Player" parent="." instance=ExtResource("2_ligcg")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.2, 1.2)
