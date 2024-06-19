@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://crn5ehh3u2pgv"]
 
-[ext_resource type="LabelSettings" uid="uid://ckd0tsmgclfmn" path="res://assets/GM_white_32.tres" id="1_kcqxo"]
 [ext_resource type="Script" path="res://scenes/hud/hud.gd" id="1_ljnf5"]
+[ext_resource type="LabelSettings" uid="uid://iklcer76af67" path="res://assets/fonts/SS_32_white.tres" id="2_y05cy"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -30,13 +30,13 @@ layout_mode = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Level:"
-label_settings = ExtResource("1_kcqxo")
+label_settings = ExtResource("2_y05cy")
 vertical_alignment = 1
 
 [node name="LevelLabel" type="Label" parent="MC/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "99"
-label_settings = ExtResource("1_kcqxo")
+label_settings = ExtResource("2_y05cy")
 vertical_alignment = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MC/VBoxContainer"]
@@ -46,27 +46,29 @@ layout_mode = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Moves:"
-label_settings = ExtResource("1_kcqxo")
+label_settings = ExtResource("2_y05cy")
 vertical_alignment = 1
 
 [node name="MovesLabel" type="Label" parent="MC/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "99"
-label_settings = ExtResource("1_kcqxo")
+label_settings = ExtResource("2_y05cy")
 vertical_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MC/VBoxContainer"]
+[node name="HBest" type="HBoxContainer" parent="MC/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MC/VBoxContainer/HBoxContainer3"]
+[node name="Label" type="Label" parent="MC/VBoxContainer/HBest"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Best:"
-label_settings = ExtResource("1_kcqxo")
+label_settings = ExtResource("2_y05cy")
 vertical_alignment = 1
 
-[node name="BestLabel" type="Label" parent="MC/VBoxContainer/HBoxContainer3"]
+[node name="BestLabel" type="Label" parent="MC/VBoxContainer/HBest"]
 layout_mode = 2
 text = "99"
-label_settings = ExtResource("1_kcqxo")
+label_settings = ExtResource("2_y05cy")
 vertical_alignment = 1
+
+[connection signal="mouse_entered" from="MC/VBoxContainer/HBest/BestLabel" to="." method="_on_best_label_mouse_entered"]

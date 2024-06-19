@@ -1,16 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://duemc5qhulqv4"]
+[gd_scene load_steps=11 format=3 uid="uid://duemc5qhulqv4"]
 
 [ext_resource type="Texture2D" uid="uid://ghxthape3hwi" path="res://assets/Purple.png" id="1_41npw"]
 [ext_resource type="Script" path="res://scenes/game_over_ui/game_over_ui.gd" id="1_rbgo5"]
 [ext_resource type="Texture2D" uid="uid://usrm5s3myu6w" path="res://assets/panel_beigeLight.png" id="2_0h45b"]
-[ext_resource type="LabelSettings" uid="uid://ucac5yo3cbgm" path="res://assets/LG_title_96.tres" id="3_2mu4h"]
-[ext_resource type="FontFile" uid="uid://cmiow5eivp6of" path="res://assets/LuckiestGuy-Regular.ttf" id="4_jih70"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_gcjyr"]
-font = ExtResource("4_jih70")
-font_size = 48
-outline_size = 18
-outline_color = Color(0, 0, 0, 1)
+[ext_resource type="LabelSettings" uid="uid://768ko403r7ms" path="res://assets/fonts/CD_96_white.tres" id="4_a8yi6"]
+[ext_resource type="LabelSettings" uid="uid://b254rla8l4wp" path="res://assets/fonts/CD_52_yellow.tres" id="5_ivov7"]
+[ext_resource type="FontFile" uid="uid://dgff5v0vb5vmu" path="res://assets/SunnySpellsBasicRegular.ttf" id="6_gyu5o"]
+[ext_resource type="LabelSettings" uid="uid://dsxudmukaq86m" path="res://assets/fonts/CD_52_lblue.tres" id="6_y75qg"]
+[ext_resource type="Texture2D" uid="uid://do125vyp3awwp" path="res://assets/game_over/MainMenu.png" id="7_iogl1"]
+[ext_resource type="Texture2D" uid="uid://mo6ua17oh77s" path="res://assets/game_over/Retry.png" id="9_6w3ck"]
+[ext_resource type="Texture2D" uid="uid://5fcl4lr6p8s3" path="res://assets/game_over/NextLevel.png" id="10_t5nqp"]
 
 [node name="GameOverUi" type="Control"]
 layout_mode = 3
@@ -66,10 +65,10 @@ theme_override_constants/margin_bottom = 24
 [node name="VB" type="VBoxContainer" parent="MC/NP/MC"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MC/NP/MC/VB"]
+[node name="LevelComplateLabel" type="Label" parent="MC/NP/MC/VB"]
 layout_mode = 2
 text = "LEVEL COMPLETE"
-label_settings = ExtResource("3_2mu4h")
+label_settings = ExtResource("4_a8yi6")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -84,7 +83,7 @@ size_flags_vertical = 3
 [node name="MovesLabel" type="Label" parent="MC/NP/MC/VB"]
 layout_mode = 2
 text = "XXX MOVES TAKEN"
-label_settings = SubResource("LabelSettings_gcjyr")
+label_settings = ExtResource("5_ivov7")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -95,10 +94,55 @@ size_flags_vertical = 3
 [node name="RecordLabel" type="Label" parent="MC/NP/MC/VB"]
 layout_mode = 2
 text = "A new record!"
-label_settings = SubResource("LabelSettings_gcjyr")
+label_settings = ExtResource("6_y75qg")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Spacer" type="Control" parent="MC/NP/MC/VB"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MC/NP/MC/VB"]
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="MainMenu" type="Button" parent="MC/NP/MC/VB/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("6_gyu5o")
+theme_override_font_sizes/font_size = 30
+icon = ExtResource("7_iogl1")
+flat = true
+icon_alignment = 1
+
+[node name="Retry" type="Button" parent="MC/NP/MC/VB/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.35
+icon = ExtResource("9_6w3ck")
+flat = true
+icon_alignment = 1
+
+[node name="NextLevel" type="Button" parent="MC/NP/MC/VB/HBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("6_gyu5o")
+theme_override_font_sizes/font_size = 30
+icon = ExtResource("10_t5nqp")
+flat = true
+icon_alignment = 1
+
+[connection signal="mouse_entered" from="MC/NP/MC/VB/HBoxContainer/MainMenu" to="." method="_on_main_menu_mouse_entered"]
+[connection signal="mouse_exited" from="MC/NP/MC/VB/HBoxContainer/MainMenu" to="." method="_on_main_menu_mouse_exited"]
+[connection signal="pressed" from="MC/NP/MC/VB/HBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="mouse_entered" from="MC/NP/MC/VB/HBoxContainer/Retry" to="." method="_on_retry_mouse_entered"]
+[connection signal="mouse_exited" from="MC/NP/MC/VB/HBoxContainer/Retry" to="." method="_on_retry_mouse_exited"]
+[connection signal="pressed" from="MC/NP/MC/VB/HBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="mouse_entered" from="MC/NP/MC/VB/HBoxContainer/NextLevel" to="." method="_on_next_level_mouse_entered"]
+[connection signal="mouse_exited" from="MC/NP/MC/VB/HBoxContainer/NextLevel" to="." method="_on_next_level_mouse_exited"]
+[connection signal="pressed" from="MC/NP/MC/VB/HBoxContainer/NextLevel" to="." method="_on_next_level_pressed"]

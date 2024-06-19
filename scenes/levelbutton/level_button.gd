@@ -8,17 +8,10 @@ const GREEN_TEXTURE = preload("res://assets/green_panel.png")
 
 var _level_number: String = "22"
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	level_label.text = _level_number
 	if ScoreSync.has_level_score(_level_number):
 		check_mark.show()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func set_level_number(level_number: String) -> void:
 	_level_number = level_number

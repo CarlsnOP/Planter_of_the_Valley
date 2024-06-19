@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://iklcer76af67"]
+
+[ext_resource type="FontFile" uid="uid://dgff5v0vb5vmu" path="res://assets/SunnySpellsBasicRegular.ttf" id="1_wahjk"]
+
+[resource]
+font = ExtResource("1_wahjk")
+font_size = 32
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.568627)
+shadow_offset = Vector2(2, 2)

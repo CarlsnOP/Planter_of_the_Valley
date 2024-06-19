@@ -5,6 +5,8 @@ extends Node2D
 @onready var camera_2d = $Camera2D
 @onready var hud = $CanvasLayer/HUD
 @onready var game_over_ui = $CanvasLayer/GameOverUi
+@onready var exit_menu = $ExitMenu
+
 
 const FLOOR_LAYER = 0
 const WALL_LAYER = 1
@@ -29,37 +31,42 @@ const LAYER_MAP = {
 
 var _moving: bool = false
 var _total_moves: int = 0
+var _paused: bool = false
 
 func _ready():
 	setup_level()
+	SignalManager.paused.connect(paused)
 
-
-func _process(delta):
+func _process(_delta):
 	
 	if Input.is_action_just_pressed("exit"):
-		GameManager.load_main_scene()
-	
-	if Input.is_action_just_pressed("reload"):
-		setup_level()
-	
-	hud.set_moves_label(_total_moves)
-	
-	if _moving:
-		return
+		_paused = true
+		exit_menu.show()
 		
-	var move_direction = Vector2i.ZERO
-	
-	if Input.is_action_just_pressed("right"):
-		move_direction = Vector2i.RIGHT
-	if Input.is_action_just_pressed("left"):
-		move_direction = Vector2i.LEFT
-	if Input.is_action_just_pressed("up"):
-		move_direction = Vector2i.UP
-	if Input.is_action_just_pressed("down"):
-		move_direction = Vector2i.DOWN
-	
-	if move_direction != Vector2i.ZERO:
-		player_move(move_direction)
+	if _paused:
+		return
+	else:
+		if Input.is_action_just_pressed("reload"):
+			setup_level()
+		
+		hud.set_moves_label(_total_moves)
+		
+		if _moving:
+			return
+
+		var move_direction = Vector2i.ZERO
+		
+		if Input.is_action_just_pressed("right"):
+			move_direction = Vector2i.RIGHT
+		if Input.is_action_just_pressed("left"):
+			move_direction = Vector2i.LEFT
+		if Input.is_action_just_pressed("up"):
+			move_direction = Vector2i.UP
+		if Input.is_action_just_pressed("down"):
+			move_direction = Vector2i.DOWN
+		
+		if move_direction != Vector2i.ZERO:
+			player_move(move_direction)
 
 func place_player_on_tile(tile_coord: Vector2i) -> void:
 	var new_pos: Vector2 = Vector2(
@@ -69,6 +76,9 @@ func place_player_on_tile(tile_coord: Vector2i) -> void:
 	player.global_position = new_pos
 
 # GAME LOGIC
+
+func paused() -> void:
+	_paused = false
 
 func check_game_state() -> void:
 	for t in tile_map.get_used_cells(TARGET_LAYER):

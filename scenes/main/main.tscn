@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6uao71fmlaqp"]
+[gd_scene load_steps=5 format=3 uid="uid://b6uao71fmlaqp"]
 
 [ext_resource type="Texture2D" uid="uid://ba0wolqeq2eyc" path="res://assets/Gray.png" id="1_8lucl"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_m5p8p"]
-[ext_resource type="LabelSettings" uid="uid://ucac5yo3cbgm" path="res://assets/LG_title_96.tres" id="2_7d6p3"]
+[ext_resource type="LabelSettings" uid="uid://768ko403r7ms" path="res://assets/fonts/CD_96_white.tres" id="3_pgkaq"]
+[ext_resource type="Texture2D" uid="uid://c4potc0i8cjhe" path="res://assets/controls.png" id="4_firgv"]
 
 [node name="Main" type="CanvasLayer"]
 script = ExtResource("1_m5p8p")
@@ -34,7 +35,7 @@ layout_mode = 2
 layout_mode = 2
 text = "SOKOBAN
 "
-label_settings = ExtResource("2_7d6p3")
+label_settings = ExtResource("3_pgkaq")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -44,3 +45,9 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 6
+
+[node name="TextureRect2" type="TextureRect" parent="MC/VB"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("4_firgv")

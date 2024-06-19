@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dgs6pu13bj1sm"]
 
 [ext_resource type="Texture2D" uid="uid://pa3u76wr5oln" path="res://assets/blue_panel.png" id="1_yek7c"]
-[ext_resource type="LabelSettings" uid="uid://ckd0tsmgclfmn" path="res://assets/GM_white_32.tres" id="2_s5eou"]
 [ext_resource type="Script" path="res://scenes/levelbutton/level_button.gd" id="2_tw8g2"]
+[ext_resource type="LabelSettings" uid="uid://iklcer76af67" path="res://assets/fonts/SS_32_white.tres" id="3_6xckb"]
 [ext_resource type="Texture2D" uid="uid://glo8csytq8fa" path="res://assets/green_checkmark.png" id="3_wl2df"]
 
 [node name="LevelButton" type="NinePatchRect"]
@@ -27,7 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "99"
-label_settings = ExtResource("2_s5eou")
+label_settings = ExtResource("3_6xckb")
 horizontal_alignment = 1
 vertical_alignment = 1
 

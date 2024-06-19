@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://bed3sjxrn6m51"]
+
+[ext_resource type="Script" path="res://scenes/exit_menu/exit_menu.gd" id="1_os0u5"]
+[ext_resource type="Texture2D" uid="uid://c7kfuon06qgbn" path="res://assets/blue_button00.png" id="2_vcp1j"]
+[ext_resource type="FontFile" uid="uid://dgff5v0vb5vmu" path="res://assets/SunnySpellsBasicRegular.ttf" id="3_hvl3x"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_70rvi"]
+font = ExtResource("3_hvl3x")
+font_size = 28
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.568627)
+shadow_offset = Vector2(2, 2)
+
+[node name="QuitMenu" type="PopupMenu"]
+handle_input_locally = false
+initial_position = 1
+size = Vector2i(300, 100)
+visible = true
+always_on_top = true
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+allow_search = false
+script = ExtResource("1_os0u5")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_vcp1j")
+expand_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Do you want to exit to menu?
+"
+label_settings = SubResource("LabelSettings_70rvi")
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_hvl3x")
+theme_override_font_sizes/font_size = 40
+text = "NO"
+flat = true
+
+[node name="Spacer2" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_hvl3x")
+theme_override_font_sizes/font_size = 40
+text = "YES"
+flat = true
+
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer/Button2" to="." method="_on_button_2_button_down"]

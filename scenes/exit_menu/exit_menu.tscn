@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://hwphkb4hlywk"]
+
+[ext_resource type="Script" path="res://scenes/exit_menu/exit_menu.gd" id="1_8w61w"]
+[ext_resource type="FontFile" uid="uid://dgff5v0vb5vmu" path="res://assets/SunnySpellsBasicRegular.ttf" id="2_ed1fd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tamyv"]
+font = ExtResource("2_ed1fd")
+font_size = 56
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 0.568627)
+shadow_offset = Vector2(2, 2)
+
+[node name="exit_menu" type="CanvasLayer"]
+script = ExtResource("1_8w61w")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Spacer3" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VB" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer/VB"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VB"]
+layout_mode = 2
+text = "Quit to main menu?"
+label_settings = SubResource("LabelSettings_tamyv")
+
+[node name="HB" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VB"]
+layout_mode = 2
+
+[node name="Spacer5" type="Control" parent="MarginContainer/HBoxContainer/VB/HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer/VB/HB"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ed1fd")
+theme_override_font_sizes/font_size = 40
+text = "NO"
+
+[node name="Spacer7" type="Control" parent="MarginContainer/HBoxContainer/VB/HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Button2" type="Button" parent="MarginContainer/HBoxContainer/VB/HB"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ed1fd")
+theme_override_font_sizes/font_size = 40
+text = "Yes"
+
+[node name="Spacer6" type="Control" parent="MarginContainer/HBoxContainer/VB/HB"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer2" type="Control" parent="MarginContainer/HBoxContainer/VB"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer4" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VB/HB/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VB/HB/Button2" to="." method="_on_button_2_pressed"]

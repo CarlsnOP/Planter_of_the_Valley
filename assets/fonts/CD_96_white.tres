@@ -1,0 +1,11 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://768ko403r7ms"]
+
+[ext_resource type="FontFile" uid="uid://caa17ntxq7vmx" path="res://assets/Cute Dino.ttf" id="1_0oeu1"]
+
+[resource]
+font = ExtResource("1_0oeu1")
+font_size = 96
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 5
+shadow_color = Color(0, 0, 0, 0.588235)
+shadow_offset = Vector2(5, 2)
