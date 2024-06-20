@@ -1,11 +1,12 @@
 extends Node2D
 
 @onready var tile_map = $TileMap
-@onready var player = $Player
-#@onready var camera_2d = $Camera2D
+@onready var player = %Player
 @onready var hud = $CanvasLayer/HUD
 @onready var game_over_ui = $CanvasLayer/GameOverUi
 @onready var exit_menu = $ExitMenu
+@onready var flame = %Flame
+@onready var light_on = %LightOn
 
 const LIGHT_ON = preload("res://scenes/light_on/light_on.tscn")
 const FLOOR_LAYER = 0
@@ -29,15 +30,17 @@ const LAYER_MAP = {
 	LAYER_KEY_BOXES: BOX_LAYER
 }
 
+
 var _moving: bool = false
 var _total_moves: int = 0
-var tween = create_tween()
+var torch_right := Vector2(30, 15)
+var torch_left := Vector2(7, 15)
+
 
 func _ready():
 	setup_level()
 
 func _process(_delta):
-	
 	if Input.is_action_just_pressed("exit"):
 		exit_menu.show()
 		
@@ -54,12 +57,16 @@ func _process(_delta):
 		
 		if Input.is_action_just_pressed("right"):
 			move_direction = Vector2i.RIGHT
+			player_right()
 		if Input.is_action_just_pressed("left"):
 			move_direction = Vector2i.LEFT
+			player_left()
 		if Input.is_action_just_pressed("up"):
 			move_direction = Vector2i.UP
+			player_up()
 		if Input.is_action_just_pressed("down"):
 			move_direction = Vector2i.DOWN
+			player_down()
 		
 		if move_direction != Vector2i.ZERO:
 			player_move(move_direction)
@@ -67,11 +74,45 @@ func _process(_delta):
 func place_player_on_tile(tile_coord: Vector2i) -> void:
 	var new_pos: Vector2 = Vector2(
 		tile_coord.x * GameData.TILE_SIZE,
-		tile_coord.y * GameData.TILE_SIZE
-	) + tile_map.global_position
+		tile_coord.y * GameData.TILE_SIZE)
 	player.global_position = new_pos
 
+func move_player(tile_coord: Vector2i) -> void:
+	var tween = get_tree().create_tween()
+	var new_pos: Vector2 = Vector2(
+		tile_coord.x * GameData.TILE_SIZE,
+		tile_coord.y * GameData.TILE_SIZE)
+	tween.tween_property(player, "position", Vector2(new_pos.x, new_pos.y), 0.1)
+
 # GAME LOGIC
+func player_up() -> void:
+	player.set_animation("walk_up")
+	flame.position = torch_right
+	light_on.position = torch_right
+	await get_tree().create_timer(0.1).timeout
+	player.set_animation("idle_up")
+
+func player_right() -> void:
+	player.set_animation("walk_right")
+	flame.position = torch_right
+	light_on.position = torch_right
+	await get_tree().create_timer(0.1).timeout
+	player.set_animation("idle_right")
+
+
+func player_left() -> void:
+	player.set_animation("walk_left")
+	flame.position = torch_left
+	light_on.position = torch_left
+	await get_tree().create_timer(0.1).timeout
+	player.set_animation("idle_left")
+
+func player_down() -> void:
+	player.set_animation("walk_down")
+	flame.position = torch_right
+	light_on.position = torch_right
+	await get_tree().create_timer(0.1).timeout
+	player.set_animation("idle")
 
 func check_game_state() -> void:
 	for t in tile_map.get_used_cells(TARGET_LAYER):
@@ -123,10 +164,11 @@ func player_move(direction: Vector2i):
 		can_move = box_can_move(new_tile, direction)
 	
 	if can_move:
+		
 		_total_moves += 1
 		if box_seen:
 			move_box(new_tile, direction)
-		place_player_on_tile(new_tile)
+		move_player(new_tile)
 		check_game_state()
 		
 	_moving = false
@@ -171,19 +213,5 @@ func setup_level() -> void:
 		add_layer_tiles(level_tiles[layer_name], layer_name)
 	
 	place_player_on_tile(Vector2i(player_start.x, player_start.y))
-	#move_camera()
 	hud.new_game(ln)
 	game_over_ui.new_game()
-
-#func move_camera() -> void:
-	#var tmr = tile_map.get_used_rect()
-	#var tile_map_start_x = tmr.position.x * GameData.TILE_SIZE
-	#var tile_map_end_x = tmr.size.x * GameData.TILE_SIZE + tile_map_start_x
-	#
-	#var tile_map_start_y = tmr.position.y * GameData.TILE_SIZE
-	#var tile_map_end_y = tmr.size.y * GameData.TILE_SIZE + tile_map_start_y
-	#
-	#var mid_x = tile_map_start_x + (tile_map_end_x - tile_map_start_x) / 2
-	#var mid_y = tile_map_start_y + (tile_map_end_y - tile_map_start_y) / 2
-	#
-	#camera_2d.position = Vector2(mid_x, mid_y)

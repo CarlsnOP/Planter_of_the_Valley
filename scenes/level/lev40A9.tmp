@@ -1,13 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://fwraimnd1ak3"]
+[gd_scene load_steps=9 format=3 uid="uid://fwraimnd1ak3"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_86rg7"]
 [ext_resource type="Texture2D" uid="uid://1604i64q0ing" path="res://assets/spritesheet.png" id="1_pu7na"]
 [ext_resource type="PackedScene" uid="uid://cxn4oy2saksw3" path="res://scenes/player/player.tscn" id="2_ligcg"]
-[ext_resource type="PackedScene" uid="uid://b1dvoj41o06cx" path="res://scenes/flame/flame.tscn" id="4_j7h22"]
 [ext_resource type="PackedScene" uid="uid://crn5ehh3u2pgv" path="res://scenes/hud/hud.tscn" id="4_t2k7n"]
 [ext_resource type="PackedScene" uid="uid://duemc5qhulqv4" path="res://scenes/game_over_ui/game_over_ui.tscn" id="5_ci0o5"]
 [ext_resource type="PackedScene" uid="uid://hwphkb4hlywk" path="res://scenes/exit_menu/exit_menu.tscn" id="6_ra2hp"]
-[ext_resource type="PackedScene" uid="uid://co3dbe68qe4v0" path="res://scenes/light_on/light_on.tscn" id="7_5wjqa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uqweb"]
 resource_name = "level_tiles"
@@ -45,17 +43,9 @@ layer_3/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("2_ligcg")]
 unique_name_in_owner = true
-animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
-
-[node name="Flame" parent="Player" instance=ExtResource("4_j7h22")]
-unique_name_in_owner = true
-position = Vector2(30, 15)
-
-[node name="LightOn" parent="Player" instance=ExtResource("7_5wjqa")]
-unique_name_in_owner = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -68,4 +58,4 @@ visible = false
 visible = false
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-color = Color(0.0757099, 0.112445, 0.194772, 1)
+color = Color(0.0865236, 0.119638, 0.145979, 1)

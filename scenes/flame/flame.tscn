@@ -12,6 +12,7 @@ colors = PackedColorArray(0.847059, 0.85098, 0.396078, 0, 0.846992, 0.850364, 0.
 [node name="Flame" type="CPUParticles2D"]
 material = SubResource("CanvasItemMaterial_hydm7")
 scale = Vector2(0.8, 0.8)
+lifetime = 0.5
 speed_scale = 0.5
 explosiveness = 0.1
 lifetime_randomness = 0.15

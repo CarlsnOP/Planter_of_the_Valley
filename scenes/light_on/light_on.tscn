@@ -27,7 +27,7 @@ _data = {
 [node name="LightOn" type="PointLight2D"]
 scale = Vector2(0.35, 0.35)
 color = Color(0.886275, 0.356863, 0.168627, 1)
-energy = 0.8
+energy = 0.9
 shadow_enabled = true
 texture = ExtResource("1_alxkw")
 
