@@ -1,45 +1,63 @@
-[gd_scene load_steps=7 format=3 uid="uid://cxn4oy2saksw3"]
+[gd_scene load_steps=11 format=3 uid="uid://cxn4oy2saksw3"]
 
 [ext_resource type="Texture2D" uid="uid://rglv7ern0ik2" path="res://assets/player-idle.png" id="1_bofvu"]
+[ext_resource type="PackedScene" uid="uid://co3dbe68qe4v0" path="res://scenes/light_on/light_on.tscn" id="2_ieht7"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="2_o4e4j"]
+[ext_resource type="PackedScene" uid="uid://b1dvoj41o06cx" path="res://scenes/flame/flame.tscn" id="3_12572"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kq8wa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyiip"]
 atlas = ExtResource("1_bofvu")
-region = Rect2(0, 0, 33, 32)
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_et6o8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pkuys"]
 atlas = ExtResource("1_bofvu")
-region = Rect2(33, 0, 33, 32)
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ae061"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_745n6"]
 atlas = ExtResource("1_bofvu")
-region = Rect2(66, 0, 33, 32)
+region = Rect2(64, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_51te3"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_prp6q"]
 atlas = ExtResource("1_bofvu")
-region = Rect2(99, 0, 33, 32)
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bfruj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kq8wa")
+"texture": SubResource("AtlasTexture_hyiip")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_et6o8")
+"texture": SubResource("AtlasTexture_pkuys")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ae061")
+"texture": SubResource("AtlasTexture_745n6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_51te3")
+"texture": SubResource("AtlasTexture_prp6q")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 8.0
 }]
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r4ypa"]
+polygon = PackedVector2Array(-31.4286, 31.4286, -48.5714, 28.5714, -54.2857, 34.2857, -48.5714, 37.1428, -42.8572, 34.2857)
+
 [node name="Player" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_bfruj")
 animation = &"idle"
 autoplay = "idle"
 offset = Vector2(18, 12)
+script = ExtResource("2_o4e4j")
+
+[node name="LightOn" parent="." instance=ExtResource("2_ieht7")]
+position = Vector2(30, 15)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(30, 15)
+scale = Vector2(0.35, 0.35)
+occluder = SubResource("OccluderPolygon2D_r4ypa")
+
+[node name="Flame" parent="." instance=ExtResource("3_12572")]
+position = Vector2(30, 15)

@@ -43,8 +43,8 @@ layer_3/tile_data = PackedInt32Array()
 
 [node name="Player" parent="." instance=ExtResource("2_ligcg")]
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.9, 1.9)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -57,4 +57,4 @@ visible = false
 visible = false
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-color = Color(0.0865236, 0.119638, 0.145979, 1)
+color = Color(0.231048, 0.295576, 0.346976, 1)

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1dvoj41o06cx"]
+
+[ext_resource type="Texture2D" uid="uid://p8gmm4v8fhkq" path="res://assets/Flame.png" id="1_1li0q"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hydm7"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_wsx5w"]
+offsets = PackedFloat32Array(0.00666667, 0.153333, 0.5, 0.76, 0.886667, 1)
+colors = PackedColorArray(0.847059, 0.85098, 0.396078, 0, 0.846992, 0.850364, 0.397034, 1, 0.65098, 0.368627, 0.145098, 1, 0.999994, 0.312346, 0.247663, 1, 1, 0.313726, 0.247059, 0, 1, 0.313726, 0.247059, 0)
+
+[node name="Flame" type="CPUParticles2D"]
+material = SubResource("CanvasItemMaterial_hydm7")
+scale = Vector2(0.8, 0.8)
+speed_scale = 0.5
+explosiveness = 0.1
+lifetime_randomness = 0.15
+texture = ExtResource("1_1li0q")
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+angle_min = -276.3
+angle_max = 465.5
+scale_amount_min = 0.5
+scale_amount_max = 0.8
+color_ramp = SubResource("Gradient_wsx5w")

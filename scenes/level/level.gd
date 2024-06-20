@@ -2,12 +2,12 @@ extends Node2D
 
 @onready var tile_map = $TileMap
 @onready var player = $Player
-@onready var camera_2d = $Camera2D
+#@onready var camera_2d = $Camera2D
 @onready var hud = $CanvasLayer/HUD
 @onready var game_over_ui = $CanvasLayer/GameOverUi
 @onready var exit_menu = $ExitMenu
 
-
+const LIGHT_ON = preload("res://scenes/light_on/light_on.tscn")
 const FLOOR_LAYER = 0
 const WALL_LAYER = 1
 const TARGET_LAYER = 2
@@ -31,20 +31,16 @@ const LAYER_MAP = {
 
 var _moving: bool = false
 var _total_moves: int = 0
-var _paused: bool = false
+var tween = create_tween()
 
 func _ready():
 	setup_level()
-	SignalManager.paused.connect(paused)
 
 func _process(_delta):
 	
 	if Input.is_action_just_pressed("exit"):
-		_paused = true
 		exit_menu.show()
 		
-	if _paused:
-		return
 	else:
 		if Input.is_action_just_pressed("reload"):
 			setup_level()
@@ -77,9 +73,6 @@ func place_player_on_tile(tile_coord: Vector2i) -> void:
 
 # GAME LOGIC
 
-func paused() -> void:
-	_paused = false
-
 func check_game_state() -> void:
 	for t in tile_map.get_used_cells(TARGET_LAYER):
 		if !cell_is_box(t):
@@ -92,6 +85,7 @@ func move_box(box_tile: Vector2i, direction: Vector2i) -> void:
 	var dest = box_tile + direction
 	
 	tile_map.erase_cell(BOX_LAYER, box_tile)
+	
 	
 	if dest in tile_map.get_used_cells(TARGET_LAYER):
 		tile_map.set_cell(BOX_LAYER, dest, SOURCE_ID, get_atlas_coord_for_layer_name(LAYER_KEY_TARGET_BOXES))
@@ -177,19 +171,19 @@ func setup_level() -> void:
 		add_layer_tiles(level_tiles[layer_name], layer_name)
 	
 	place_player_on_tile(Vector2i(player_start.x, player_start.y))
-	move_camera()
+	#move_camera()
 	hud.new_game(ln)
 	game_over_ui.new_game()
 
-func move_camera() -> void:
-	var tmr = tile_map.get_used_rect()
-	var tile_map_start_x = tmr.position.x * GameData.TILE_SIZE
-	var tile_map_end_x = tmr.size.x * GameData.TILE_SIZE + tile_map_start_x
-	
-	var tile_map_start_y = tmr.position.y * GameData.TILE_SIZE
-	var tile_map_end_y = tmr.size.y * GameData.TILE_SIZE + tile_map_start_y
-	
-	var mid_x = tile_map_start_x + (tile_map_end_x - tile_map_start_x) / 2
-	var mid_y = tile_map_start_y + (tile_map_end_y - tile_map_start_y) / 2
-	
-	camera_2d.position = Vector2(mid_x, mid_y)
+#func move_camera() -> void:
+	#var tmr = tile_map.get_used_rect()
+	#var tile_map_start_x = tmr.position.x * GameData.TILE_SIZE
+	#var tile_map_end_x = tmr.size.x * GameData.TILE_SIZE + tile_map_start_x
+	#
+	#var tile_map_start_y = tmr.position.y * GameData.TILE_SIZE
+	#var tile_map_end_y = tmr.size.y * GameData.TILE_SIZE + tile_map_start_y
+	#
+	#var mid_x = tile_map_start_x + (tile_map_end_x - tile_map_start_x) / 2
+	#var mid_y = tile_map_start_y + (tile_map_end_y - tile_map_start_y) / 2
+	#
+	#camera_2d.position = Vector2(mid_x, mid_y)
