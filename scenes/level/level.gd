@@ -7,8 +7,14 @@ extends Node2D
 @onready var exit_menu = $ExitMenu
 @onready var flame = %Flame
 @onready var light_on = %LightOn
+@onready var music_player = $MusicPlayer
+@onready var footsteps_player = $FootstepsPlayer
+@onready var sfx_player = $SFXPlayer
+@onready var camera_2d = $Player/Camera2D
 
+const PARTICLES = preload("res://scenes/particles/particles.tscn")
 const LIGHT_ON = preload("res://scenes/light_on/light_on.tscn")
+
 const FLOOR_LAYER = 0
 const WALL_LAYER = 1
 const TARGET_LAYER = 2
@@ -36,11 +42,13 @@ var _total_moves: int = 0
 var torch_right := Vector2(30, 15)
 var torch_left := Vector2(7, 15)
 
-
 func _ready():
 	setup_level()
-
+	
 func _process(_delta):
+	if Input.is_action_just_pressed("test"):
+		PARTICLES.instantiate()
+		
 	if Input.is_action_just_pressed("exit"):
 		exit_menu.show()
 		
@@ -82,6 +90,7 @@ func move_player(tile_coord: Vector2i) -> void:
 	var new_pos: Vector2 = Vector2(
 		tile_coord.x * GameData.TILE_SIZE,
 		tile_coord.y * GameData.TILE_SIZE)
+	SoundManager.play_footstep(footsteps_player, SoundManager.FOOTSTEPS.keys().pick_random())
 	tween.tween_property(player, "position", Vector2(new_pos.x, new_pos.y), 0.1)
 
 # GAME LOGIC
@@ -118,6 +127,7 @@ func check_game_state() -> void:
 	for t in tile_map.get_used_cells(TARGET_LAYER):
 		if !cell_is_box(t):
 			return
+	SoundManager.play_sfx(footsteps_player, SoundManager.WIN)
 	game_over_ui.game_over(GameManager.get_level_selected(), _total_moves)
 	hud.hide()
 	ScoreSync.level_completed(GameManager.get_level_selected(), _total_moves)
@@ -129,6 +139,8 @@ func move_box(box_tile: Vector2i, direction: Vector2i) -> void:
 	
 	
 	if dest in tile_map.get_used_cells(TARGET_LAYER):
+		SoundManager.play_sfx(sfx_player, SoundManager.PLANT)
+		camera_2d.apply_shake(1, 8)
 		tile_map.set_cell(BOX_LAYER, dest, SOURCE_ID, get_atlas_coord_for_layer_name(LAYER_KEY_TARGET_BOXES))
 	else:
 		tile_map.set_cell(BOX_LAYER, dest, SOURCE_ID, get_atlas_coord_for_layer_name(LAYER_KEY_BOXES))
@@ -201,6 +213,7 @@ func add_layer_tiles(layer_tiles, layer_name: String) -> void:
 		add_tile(tile_coord.coord, layer_name)
 
 func setup_level() -> void:
+	SoundManager.play_sfx(sfx_player, SoundManager.MENU_SELECT)
 	tile_map.clear()
 	var ln = GameManager.get_level_selected()
 	var level_data = GameData.get_data_for_level(ln)
@@ -215,3 +228,4 @@ func setup_level() -> void:
 	place_player_on_tile(Vector2i(player_start.x, player_start.y))
 	hud.new_game(ln)
 	game_over_ui.new_game()
+	SoundManager.play_clip(music_player, SoundManager.SOUNDS.keys().pick_random())

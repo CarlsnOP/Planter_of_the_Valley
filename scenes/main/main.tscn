@@ -51,3 +51,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 texture = ExtResource("4_firgv")
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+bus = &"Music"

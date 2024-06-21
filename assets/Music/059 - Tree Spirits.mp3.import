@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://df5ltypfs8a8o"
+path="res://.godot/imported/059 - Tree Spirits.mp3-102b1dcf8c6b33cd15739df53b2d1e62.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/059 - Tree Spirits.mp3"
+dest_files=["res://.godot/imported/059 - Tree Spirits.mp3-102b1dcf8c6b33cd15739df53b2d1e62.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

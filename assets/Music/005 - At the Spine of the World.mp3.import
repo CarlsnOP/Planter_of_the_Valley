@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bgn6ywkj1p5u5"
+path="res://.godot/imported/005 - At the Spine of the World.mp3-972f3d19db04c45c562f0906fa3cb5b7.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/005 - At the Spine of the World.mp3"
+dest_files=["res://.godot/imported/005 - At the Spine of the World.mp3-972f3d19db04c45c562f0906fa3cb5b7.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

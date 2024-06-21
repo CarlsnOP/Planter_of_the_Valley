@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://r4iqplcim8t8"
+path="res://.godot/imported/098 - Forest March.mp3-c41228c0680968c43159209ab374f170.mp3str"
+
+[deps]
+
+source_file="res://assets/Music/098 - Forest March.mp3"
+dest_files=["res://.godot/imported/098 - Forest March.mp3-c41228c0680968c43159209ab374f170.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
