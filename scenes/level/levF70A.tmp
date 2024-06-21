@@ -50,7 +50,7 @@ animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)
-position_smoothing_speed = 3.0
+position_smoothing_enabled = true
 script = ExtResource("4_ki171")
 
 [node name="Flame" parent="Player" instance=ExtResource("4_j7h22")]

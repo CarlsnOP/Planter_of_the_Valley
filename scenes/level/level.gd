@@ -12,7 +12,7 @@ extends Node2D
 @onready var sfx_player = $SFXPlayer
 @onready var camera_2d = $Player/Camera2D
 
-const PARTICLES = preload("res://scenes/particles/particles.tscn")
+const DIRT_PARTICLES: PackedScene = preload("res://scenes/particles/dirt.tscn")
 const LIGHT_ON = preload("res://scenes/light_on/light_on.tscn")
 
 const FLOOR_LAYER = 0
@@ -46,8 +46,6 @@ func _ready():
 	setup_level()
 	
 func _process(_delta):
-	if Input.is_action_just_pressed("test"):
-		PARTICLES.instantiate()
 		
 	if Input.is_action_just_pressed("exit"):
 		exit_menu.show()
@@ -79,6 +77,7 @@ func _process(_delta):
 		if move_direction != Vector2i.ZERO:
 			player_move(move_direction)
 
+# PLAYER MOVEMENT
 func place_player_on_tile(tile_coord: Vector2i) -> void:
 	var new_pos: Vector2 = Vector2(
 		tile_coord.x * GameData.TILE_SIZE,
@@ -92,6 +91,12 @@ func move_player(tile_coord: Vector2i) -> void:
 		tile_coord.y * GameData.TILE_SIZE)
 	SoundManager.play_footstep(footsteps_player, SoundManager.FOOTSTEPS.keys().pick_random())
 	tween.tween_property(player, "position", Vector2(new_pos.x, new_pos.y), 0.1)
+
+#PARTICLES
+func spawn_dirt_particles(pos: Vector2i) -> void:
+	var instance = DIRT_PARTICLES.instantiate()
+	get_tree().current_scene.add_child(instance)
+	instance.global_position = Vector2(pos.x + 16, pos.y + 16)
 
 # GAME LOGIC
 func player_up() -> void:
@@ -134,13 +139,14 @@ func check_game_state() -> void:
 
 func move_box(box_tile: Vector2i, direction: Vector2i) -> void:
 	var dest = box_tile + direction
+	var particle_pos: Vector2 = Vector2(dest * GameData.TILE_SIZE)
 	
 	tile_map.erase_cell(BOX_LAYER, box_tile)
 	
-	
 	if dest in tile_map.get_used_cells(TARGET_LAYER):
 		SoundManager.play_sfx(sfx_player, SoundManager.PLANT)
-		camera_2d.apply_shake(1, 8)
+		spawn_dirt_particles(particle_pos)
+		camera_2d.apply_shake(2, 8)
 		tile_map.set_cell(BOX_LAYER, dest, SOURCE_ID, get_atlas_coord_for_layer_name(LAYER_KEY_TARGET_BOXES))
 	else:
 		tile_map.set_cell(BOX_LAYER, dest, SOURCE_ID, get_atlas_coord_for_layer_name(LAYER_KEY_BOXES))

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cxn4oy2saksw3"]
+[gd_scene load_steps=32 format=3 uid="uid://cxn4oy2saksw3"]
 
 [ext_resource type="Texture2D" uid="uid://rglv7ern0ik2" path="res://assets/Player/player-idle.png" id="1_p7lpa"]
 [ext_resource type="Texture2D" uid="uid://drigpeswq4xka" path="res://assets/Player/player-idle-left.png" id="2_nby6e"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dkdfulo41twrv" path="res://assets/Player/player-walk-left.png" id="6_jeouw"]
 [ext_resource type="Texture2D" uid="uid://3is7tanj6gpv" path="res://assets/Player/player-walk_right.png" id="7_kxh4u"]
 [ext_resource type="Texture2D" uid="uid://c3h1etxftpgud" path="res://assets/Player/player-walk-up.png" id="8_n3dc1"]
+[ext_resource type="Script" path="res://scenes/player/player.gd" id="9_jdyl3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pmxpw"]
 atlas = ExtResource("1_p7lpa")
@@ -214,3 +215,4 @@ animation = &"walk_up"
 autoplay = "idle"
 speed_scale = 0.3
 offset = Vector2(18, 12)
+script = ExtResource("9_jdyl3")

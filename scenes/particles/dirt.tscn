@@ -1,27 +1,34 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwkj8q3b8anbw"]
+[gd_scene load_steps=5 format=3 uid="uid://cwkj8q3b8anbw"]
 
 [ext_resource type="Texture2D" uid="uid://bsslgwrg140uu" path="res://assets/particle.png" id="1_ylo87"]
+[ext_resource type="Script" path="res://scenes/particles/dirt.gd" id="2_es8vd"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_p653v"]
-blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_dql4o"]
-offsets = PackedFloat32Array(0, 0.186667, 0.74, 0.893333, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0.485228, 0.324424, 0.285732, 0.984314, 0.494118, 0.223529, 0.0705882, 1, 0.893333, 0.893333, 0.893333, 0, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.0133333, 0.0933333, 0.673333, 1)
+colors = PackedColorArray(0.623529, 0.337255, 0.141176, 0, 0.623839, 0.33803, 0.141351, 0.984314, 0.494118, 0.223529, 0.0705882, 1, 1, 1, 1, 0)
 
 [node name="Dirt" type="CPUParticles2D"]
 material = SubResource("CanvasItemMaterial_p653v")
+emitting = false
 amount = 12
+one_shot = true
 speed_scale = 1.79
 explosiveness = 1.0
 texture = ExtResource("1_ylo87")
 direction = Vector2(0, -90)
 spread = 59.55
 gravity = Vector2(0, 0)
-initial_velocity_min = 50.0
-initial_velocity_max = 90.0
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
 angle_max = 180.0
 scale_amount_min = 0.2
 scale_amount_max = 0.2
 color = Color(0.494118, 0.223529, 0.0705882, 1)
 color_ramp = SubResource("Gradient_dql4o")
+script = ExtResource("2_es8vd")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
