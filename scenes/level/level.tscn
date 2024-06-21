@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://fwraimnd1ak3"]
+[gd_scene load_steps=13 format=3 uid="uid://fwraimnd1ak3"]
 
 [ext_resource type="Script" path="res://scenes/level/level.gd" id="1_86rg7"]
 [ext_resource type="Texture2D" uid="uid://1604i64q0ing" path="res://assets/spritesheet.png" id="1_pu7na"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://duemc5qhulqv4" path="res://scenes/game_over_ui/game_over_ui.tscn" id="5_ci0o5"]
 [ext_resource type="PackedScene" uid="uid://hwphkb4hlywk" path="res://scenes/exit_menu/exit_menu.tscn" id="6_ra2hp"]
 [ext_resource type="PackedScene" uid="uid://co3dbe68qe4v0" path="res://scenes/light_on/light_on.tscn" id="7_5wjqa"]
+[ext_resource type="Texture2D" uid="uid://baf3fefoomoqb" path="res://assets/game_bg.png" id="10_ycoxw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uqweb"]
 resource_name = "level_tiles"
@@ -50,9 +51,14 @@ animation = &"idle"
 frame_progress = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.7, 1.7)
 position_smoothing_speed = 3.0
 script = ExtResource("4_ki171")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Player/Camera2D"]
+scroll_offset = Vector2(32, 32)
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Player/Camera2D/ParallaxBackground"]
 
 [node name="Flame" parent="Player" instance=ExtResource("4_j7h22")]
 unique_name_in_owner = true
@@ -60,6 +66,20 @@ position = Vector2(30, 15)
 
 [node name="LightOn" parent="Player" instance=ExtResource("7_5wjqa")]
 unique_name_in_owner = true
+
+[node name="Background" type="CanvasLayer" parent="Player"]
+layer = -10
+
+[node name="TextureRect" type="TextureRect" parent="Player/Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 268.0
+offset_bottom = 268.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_ycoxw")
+stretch_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -72,7 +92,7 @@ visible = false
 visible = false
 
 [node name="Darkness" type="CanvasModulate" parent="."]
-color = Color(0.0757099, 0.112445, 0.194772, 1)
+color = Color(0.208606, 0.280355, 0.440558, 1)
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 bus = &"Music"

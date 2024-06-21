@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b6uao71fmlaqp"]
 
-[ext_resource type="Texture2D" uid="uid://ba0wolqeq2eyc" path="res://assets/Gray.png" id="1_8lucl"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_m5p8p"]
+[ext_resource type="Texture2D" uid="uid://dt7t6mtvb3jgt" path="res://assets/background.png" id="2_3q40a"]
 [ext_resource type="LabelSettings" uid="uid://768ko403r7ms" path="res://assets/fonts/CD_96_white.tres" id="3_pgkaq"]
 [ext_resource type="Texture2D" uid="uid://c4potc0i8cjhe" path="res://assets/controls.png" id="4_firgv"]
 
@@ -14,7 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_8lucl")
+texture = ExtResource("2_3q40a")
 stretch_mode = 1
 
 [node name="MC" type="MarginContainer" parent="."]

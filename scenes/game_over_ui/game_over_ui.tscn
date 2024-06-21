@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://duemc5qhulqv4"]
 
-[ext_resource type="Texture2D" uid="uid://ghxthape3hwi" path="res://assets/Purple.png" id="1_41npw"]
 [ext_resource type="Script" path="res://scenes/game_over_ui/game_over_ui.gd" id="1_rbgo5"]
-[ext_resource type="Texture2D" uid="uid://usrm5s3myu6w" path="res://assets/panel_beigeLight.png" id="2_0h45b"]
+[ext_resource type="Texture2D" uid="uid://dt7t6mtvb3jgt" path="res://assets/background.png" id="2_boc45"]
+[ext_resource type="Texture2D" uid="uid://bbe2jvco5gt8f" path="res://assets/gameover.png" id="3_pmqnq"]
 [ext_resource type="LabelSettings" uid="uid://768ko403r7ms" path="res://assets/fonts/CD_96_white.tres" id="4_a8yi6"]
 [ext_resource type="LabelSettings" uid="uid://b254rla8l4wp" path="res://assets/fonts/CD_52_yellow.tres" id="5_ivov7"]
 [ext_resource type="FontFile" uid="uid://dgff5v0vb5vmu" path="res://assets/SunnySpellsBasicRegular.ttf" id="6_gyu5o"]
@@ -27,7 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_41npw")
+texture = ExtResource("2_boc45")
 stretch_mode = 1
 
 [node name="MC" type="MarginContainer" parent="."]
@@ -44,7 +44,7 @@ theme_override_constants/margin_bottom = 64
 
 [node name="NP" type="NinePatchRect" parent="MC"]
 layout_mode = 2
-texture = ExtResource("2_0h45b")
+texture = ExtResource("3_pmqnq")
 patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
