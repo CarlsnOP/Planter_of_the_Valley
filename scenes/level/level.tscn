@@ -47,6 +47,7 @@ layer_3/tile_data = PackedInt32Array()
 [node name="Player" parent="." instance=ExtResource("2_ligcg")]
 unique_name_in_owner = true
 animation = &"idle"
+frame_progress = 0.0
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(2, 2)

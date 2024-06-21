@@ -12,6 +12,7 @@ extends Node2D
 @onready var sfx_player = $SFXPlayer
 @onready var camera_2d = $Player/Camera2D
 
+const DUST_PARTICLES = preload("res://scenes/particles/dust.tscn")
 const DIRT_PARTICLES: PackedScene = preload("res://scenes/particles/dirt.tscn")
 const LIGHT_ON = preload("res://scenes/light_on/light_on.tscn")
 
@@ -76,6 +77,8 @@ func _process(_delta):
 		
 		if move_direction != Vector2i.ZERO:
 			player_move(move_direction)
+			var pos = get_player_tile()
+			spawn_dust_particles(pos, move_direction)
 
 # PLAYER MOVEMENT
 func place_player_on_tile(tile_coord: Vector2i) -> void:
@@ -97,6 +100,13 @@ func spawn_dirt_particles(pos: Vector2i) -> void:
 	var instance = DIRT_PARTICLES.instantiate()
 	get_tree().current_scene.add_child(instance)
 	instance.global_position = Vector2(pos.x + 16, pos.y + 16)
+	
+func spawn_dust_particles(pos: Vector2i, normal: Vector2) -> void:
+	var instance = DUST_PARTICLES.instantiate()
+	var new_pos = Vector2(pos.x * GameData.TILE_SIZE, pos.y * GameData.TILE_SIZE)
+	get_tree().current_scene.add_child(instance)
+	instance.global_position = Vector2(new_pos.x + 16, new_pos.y + 28)
+	instance.rotation = -normal.angle()
 
 # GAME LOGIC
 func player_up() -> void:
